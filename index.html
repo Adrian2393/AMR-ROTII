@@ -111,4 +111,65 @@ h2 {
 </head>
 <body>
   <header>
-    <
+    <h1>Callendar EUFOR rot. II</h1>
+    <div class="flags">
+      <img src="https://flagcdn.com/w40/ro.png" alt="RO">
+      <img src="https://flagcdn.com/w40/ba.png" alt="BA">
+    </div>
+    <p>13 mai – 23 septembrie 2025</p>
+  </header>  <div class="progress-container">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>  <div class="progress-text" id="progressText"></div>  <h2>Mai</h2>
+  <div class="days-of-week">
+    <div>Lun</div><div>Mar</div><div>Mie</div><div>Joi</div><div>Vin</div><div>Sâm</div><div>Dum</div>
+  </div>
+  <div class="calendar" id="calendar"></div>  <script>
+    const startDate = new Date("2025-05-13");
+    const endDate = new Date("2025-09-23");
+    const today = new Date();
+    const totalDays = 134;
+    const timeDiff = today - startDate;
+    const daysPassed = Math.floor(timeDiff / (1000 * 60 * 60 * 24)) + 1;
+    const daysRemaining = totalDays - daysPassed;
+
+    // Progress Bar
+    const progress = Math.min((daysPassed / totalDays) * 100, 100);
+    const progressBar = document.getElementById("progressBar");
+    progressBar.style.width = `${progress}%`;
+    progressBar.innerText = `${Math.min(daysPassed, totalDays)} / ${totalDays}`;
+
+    // Progress Text
+    const progressText = document.getElementById("progressText");
+    if (daysPassed >= 1 && daysPassed <= totalDays) {
+      progressText.innerHTML = `
+        <p style="font-family: 'Segoe UI', sans-serif; font-size: 20px;">
+          Astăzi este ziua <strong>${daysPassed}</strong> din ${totalDays}
+        </p>
+        <p style="font-size: 18px; color: #333;">
+          Au mai rămas <strong>${daysRemaining}</strong> zile până la 23 septembrie 2025
+        </p>
+      `;
+    } else if (daysPassed < 1) {
+      progressText.innerHTML = `<p>Calendarul nu a început încă.</p>`;
+    } else {
+      progressText.innerHTML = `<p>Calendarul s-a încheiat.</p>`;
+    }
+
+    // Calendar Zile
+    const calendarContainer = document.getElementById("calendar");
+    for (let i = 1; i <= 31; i++) {
+      const day = document.createElement("div");
+      day.className = "day";
+      day.innerText = i;
+      const date = new Date(`2025-05-${String(i).padStart(2, '0')}`);
+      if (date < today) {
+        const cross = document.createElement("img");
+        cross.src = "./x-brush.png";
+        cross.alt = "X";
+        cross.className = "cross";
+        day.appendChild(cross);
+      }
+      calendarContainer.appendChild(day);
+    }
+  </script></body>
+</html>
