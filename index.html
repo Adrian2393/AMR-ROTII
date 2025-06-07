@@ -4,115 +4,167 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Calendar EUFOR rot. II</title>
-  <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Pacifico&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Rubik:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    /* (CSS-ul rămâne neschimbat, nu îl mai copiez pentru spațiu) */
+    body {
+      margin: 0;
+      font-family: 'Rubik', sans-serif;
+      background-color: #f0fdf4;
+      color: #1c1c1c;
+      text-align: center;
+    }
+    header {
+      background-color: #22543d;
+      color: white;
+      padding: 20px 10px;
+    }
+    .title {
+      font-size: 2rem;
+      font-weight: bold;
+    }
+    .subtitle {
+      font-family: 'Pacifico', cursive;
+      font-size: 1.8rem;
+      margin-top: 10px;
+    }
+    .progress-container {
+      background-color: #e2e8f0;
+      height: 30px;
+      position: relative;
+      margin: 0 auto;
+      max-width: 800px;
+      border-radius: 15px;
+      overflow: hidden;
+    }
+    .progress-bar {
+      height: 100%;
+      transition: width 0.5s, background 0.5s;
+      position: relative;
+    }
+    .progress-bar span {
+      position: absolute;
+      width: 100%;
+      text-align: center;
+      line-height: 30px;
+      font-weight: bold;
+    }
+    .progress-indicator {
+      position: absolute;
+      top: -12px;
+      width: 40px;
+      height: 40px;
+      background-color: white;
+      border: 3px solid #38a169;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      color: #38a169;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+    .info {
+      margin: 20px 0 10px;
+      font-size: 1.3rem;
+      font-weight: bold;
+      text-shadow: 1px 1px 2px #b7b7b7;
+    }
+    .motivational {
+      font-family: 'Pacifico', cursive;
+      font-size: 1.6rem;
+      color: #2f855a;
+      animation: pulse 2s infinite;
+      text-shadow: 1px 1px 1px #ccc;
+    }
+    .days-left {
+      margin-top: 5px;
+      font-size: 1.1rem;
+      color: #2d3748;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.05); opacity: 0.8; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    @keyframes dangerPulse {
+      0% { transform: scale(1); box-shadow: 0 0 5px #f56565; }
+      50% { transform: scale(1.03); box-shadow: 0 0 15px #f56565; }
+      100% { transform: scale(1); box-shadow: 0 0 5px #f56565; }
+    }
+
+    .progress-bar.pulse {
+      animation: dangerPulse 1.5s infinite;
+    }
   </style>
 </head>
 <body>
-
   <header>
-    <h1>Calendar EUFOR rot. II</h1>
-    <div class="flags">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/7/73/Flag_of_Romania.svg" alt="România">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/b/bf/Flag_of_Bosnia_and_Herzegovina.svg" alt="Bosnia și Herțegovina">
-    </div>
-    <p>13 mai – 23 septembrie 2025</p>
+    <div class="title">Calendar EUFOR rot. II</div>
+    <div class="subtitle">13 mai – 23 septembrie 2025</div>
   </header>
 
-  <div class="progress-bar">
-    <div class="progress-bar-inner" id="progressBarInner"></div>
-    <div class="progress-bar-text" id="progressBarText">Loading...</div>
+  <div class="progress-container">
+    <div id="progress-bar" class="progress-bar" style="width: 0%;">
+      <span id="progress-text">0 / 0</span>
+    </div>
+    <div id="progress-indicator" class="progress-indicator" style="left: 0%;">1</div>
   </div>
 
-  <div id="currentDayInfo"></div>
-  <div id="motivation">Keep going, you're doing great!</div>
-  <div id="countdown"></div>
-  <div id="calendarContainer"></div>
-
-  <footer>
-    &copy; 2025 Calendar EUFOR rot. II. Toate drepturile rezervate. ® Adrian R.
-  </footer>
+  <div class="info" id="day-text">Azi e ...</div>
+  <div class="motivational">Keep going, you're doing great!</div>
+  <div class="days-left" id="days-left">Au mai rămas ... zile</div>
 
   <script>
-    // Setăm toate datele la ora 00:00 locală
-    const startDate = new Date(2025, 4, 13); // 13 mai 2025
-    const endDate = new Date(2025, 8, 23);   // 23 septembrie 2025
-
+    const startDate = new Date("2025-05-13");
+    const endDate = new Date("2025-09-23");
     const today = new Date();
-    today.setHours(0, 0, 0, 0);
 
     const totalDays = Math.floor((endDate - startDate) / (1000 * 60 * 60 * 24)) + 1;
-    const daysPassed = Math.floor((today - startDate) / (1000 * 60 * 60 * 24));
-    const currentDay = daysPassed + 1;
-    const daysLeft = Math.max(0, totalDays - currentDay);
+    const daysPassed = Math.floor((today - startDate) / (1000 * 60 * 60 * 24)) + 1;
+    const currentDay = Math.min(Math.max(daysPassed, 1), totalDays);
+    const daysRemaining = totalDays - currentDay;
 
-    // Bara de progres arată doar zilele complet trecute
-    const percent = Math.min(100, Math.floor((daysPassed / totalDays) * 100));
-    document.getElementById("progressBarInner").style.width = percent + "%";
-    document.getElementById("progressBarText").textContent = `${daysPassed} / ${totalDays} zile`;
-
-    // Data formatată pentru afișare
     const formattedDate = today.toLocaleDateString('ro-RO', {
       day: '2-digit',
       month: '2-digit',
       year: 'numeric'
     });
 
-    // Afișăm ziua curentă (cu +1 față de zilele trecute)
-    document.getElementById("currentDayInfo").innerHTML = `Azi e <strong>${formattedDate}</strong>, ziua <strong>${currentDay} / ${totalDays}</strong>`;
-    document.getElementById("countdown").textContent = `Au mai rămas ${daysLeft} zile`;
+    document.getElementById("day-text").textContent = `Azi e ${formattedDate}, ziua ${currentDay + 1} / ${totalDays}`;
+    document.getElementById("days-left").textContent = `Au mai rămas ${daysRemaining} zile`;
 
-    // Calendarul propriu-zis
-    const calendarContainer = document.getElementById("calendarContainer");
-    const monthNames = ["Ianuarie", "Februarie", "Martie", "Aprilie", "Mai", "Iunie", "Iulie", "August", "Septembrie"];
-    const weekdays = ["Lun", "Mar", "Mie", "Joi", "Vin", "Sâm", "Dum"];
+    const progressPercentage = (currentDay / totalDays) * 100;
+    const progressBar = document.getElementById("progress-bar");
+    const progressText = document.getElementById("progress-text");
 
-    let date = new Date(startDate);
-    let currentMonth = -1;
-    let calendarGrid;
-
-    while (date <= endDate) {
-      if (date.getMonth() !== currentMonth) {
-        currentMonth = date.getMonth();
-        const monthSection = document.createElement("div");
-        monthSection.className = "month-section";
-        const monthTitle = document.createElement("h2");
-        monthTitle.textContent = monthNames[currentMonth];
-        monthSection.appendChild(monthTitle);
-        calendarGrid = document.createElement("div");
-        calendarGrid.className = "calendar";
-
-        weekdays.forEach(day => {
-          const weekday = document.createElement("div");
-          weekday.className = "weekday";
-          weekday.textContent = day;
-          calendarGrid.appendChild(weekday);
-        });
-
-        const offset = (date.getDay() + 6) % 7;
-        for (let i = 0; i < offset; i++) {
-          const empty = document.createElement("div");
-          calendarGrid.appendChild(empty);
-        }
-
-        monthSection.appendChild(calendarGrid);
-        calendarContainer.appendChild(monthSection);
-      }
-
-      const dayBox = document.createElement("div");
-      dayBox.classList.add("day");
-      dayBox.textContent = date.getDate();
-
-      if (date < today) {
-        dayBox.classList.add("past");
-      } else if (date.getTime() === today.getTime()) {
-        dayBox.classList.add("today");
-      }
-
-      calendarGrid.appendChild(dayBox);
-      date.setDate(date.getDate() + 1);
+    // Gradient progresiv
+    let gradient;
+    if (progressPercentage < 50) {
+      gradient = `linear-gradient(to right, #48bb78, #ecc94b ${progressPercentage}%)`;
+      progressText.style.color = "white";
+    } else {
+      gradient = `linear-gradient(to right, #ecc94b, #f56565 ${progressPercentage}%)`;
+      progressText.style.color = progressPercentage < 67 ? "#1a202c" : "white";
     }
+    progressBar.style.background = gradient;
+    progressBar.style.width = `${progressPercentage}%`;
+
+    // Pulsare dacă progresul este ≥ 80%
+    if (progressPercentage >= 80) {
+      progressBar.classList.add("pulse");
+    } else {
+      progressBar.classList.remove("pulse");
+    }
+
+    // Text din bară
+    progressText.textContent = `${currentDay} / ${totalDays}`;
+
+    // Indicator
+    const indicator = document.getElementById("progress-indicator");
+    indicator.textContent = currentDay + 1;
+    indicator.style.left = `calc(${progressPercentage}% - 20px)`;
   </script>
 </body>
 </html>
