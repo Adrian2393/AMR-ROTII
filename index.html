@@ -32,7 +32,7 @@
     }
 
     .progress-container {
-      background-color: #e2e8f0;
+      background: linear-gradient(to right, #38a169, #f6e05e, #e53e3e); /* gradient pe întreaga bară */
       height: 30px;
       position: relative;
       margin: 30px auto 10px;
@@ -44,14 +44,14 @@
     .progress-bar {
       height: 100%;
       width: 0%;
+      background-color: rgba(255, 255, 255, 0.6); /* overlay alb translucid */
       transition: width 2s ease-in-out;
-      background: linear-gradient(to right, #38a169, #f6e05e, #e53e3e);
     }
 
     .progress-indicator {
       position: absolute;
-      top: -20px;
-      width: 60px;
+      top: -25px;
+      width: 70px;
       height: 40px;
       background-color: white;
       border: 3px solid #38a169;
@@ -115,9 +115,9 @@
     today.setHours(0, 0, 0, 0);
 
     const totalDays = Math.floor((endDate - startDate) / (1000 * 60 * 60 * 24)) + 1;
-    const daysPassed = Math.floor((today - startDate) / (1000 * 60 * 60 * 24)); // fără ziua de azi
+    const daysPassed = Math.floor((today - startDate) / (1000 * 60 * 60 * 24)); // exclude azi
     const currentDay = Math.min(daysPassed + 1, totalDays);
-    const daysRemaining = totalDays - currentDay;
+    const progressPercentage = Math.min((currentDay / totalDays) * 100, 100);
 
     const formattedDate = today.toLocaleDateString('ro-RO', {
       day: '2-digit',
@@ -128,7 +128,6 @@
     const progressBar = document.getElementById("progress-bar");
     const indicator = document.getElementById("progress-indicator");
 
-    // HANDLING EDGE CASES
     if (today < startDate) {
       document.getElementById("day-text").textContent = `Încă nu a început misiunea`;
       document.getElementById("days-left").textContent = `Vor fi ${totalDays} zile în total.`;
@@ -140,17 +139,16 @@
       document.getElementById("days-left").textContent = `Ai finalizat toate cele ${totalDays} zile!`;
       progressBar.style.width = "100%";
       indicator.textContent = `${totalDays} / ${totalDays}`;
-      indicator.style.left = `calc(100% - 30px)`;
+      indicator.style.left = `calc(100% - 35px)`;
     } else {
-      // Normal situation
+      // Aici suntem în perioada activă
       document.getElementById("day-text").textContent = `Azi e ${formattedDate}`;
       document.getElementById("days-left").textContent = `Zile trecute: ${daysPassed} + 1 (azi) → ${currentDay} / ${totalDays}`;
 
-      const progressPercentage = (currentDay / totalDays) * 100;
+      // Umple progres bar-ul și mută indicatorul
       progressBar.style.width = `${progressPercentage}%`;
-
-      indicator.textContent = `${currentDay} / ${totalDays}`;
-      indicator.style.left = `calc(${progressPercentage}% - 30px)`;
+      indicator.textContent = `${daysPassed} / ${totalDays}`;
+      indicator.style.left = `calc(${progressPercentage}% - 35px)`;
     }
   </script>
 </body>
