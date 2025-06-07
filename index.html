@@ -13,62 +13,65 @@
       color: #1c1c1c;
       text-align: center;
     }
+
     header {
       background-color: #22543d;
       color: white;
       padding: 20px 10px;
     }
+
     .title {
       font-size: 2rem;
       font-weight: bold;
     }
+
     .subtitle {
       font-family: 'Pacifico', cursive;
       font-size: 1.8rem;
       margin-top: 10px;
     }
+
     .progress-container {
       background-color: #e2e8f0;
       height: 30px;
       position: relative;
-      margin: 0 auto;
+      margin: 30px auto 10px;
       max-width: 800px;
       border-radius: 15px;
       overflow: hidden;
     }
+
     .progress-bar {
       height: 100%;
-      transition: width 0.5s, background 0.5s;
-      position: relative;
+      width: 0%;
+      transition: width 2s ease-in-out;
+      background: linear-gradient(to right, #38a169, #f6e05e, #e53e3e);
     }
-    .progress-bar span {
-      position: absolute;
-      width: 100%;
-      text-align: center;
-      line-height: 30px;
-      font-weight: bold;
-    }
+
     .progress-indicator {
       position: absolute;
-      top: -12px;
-      width: 40px;
+      top: -20px;
+      width: 60px;
       height: 40px;
       background-color: white;
       border: 3px solid #38a169;
-      border-radius: 50%;
+      border-radius: 20px;
       display: flex;
       justify-content: center;
       align-items: center;
       font-weight: bold;
-      color: #38a169;
+      color: #2f855a;
       box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      transition: left 2s ease-in-out;
     }
+
     .info {
       margin: 20px 0 10px;
       font-size: 1.3rem;
       font-weight: bold;
       text-shadow: 1px 1px 2px #b7b7b7;
     }
+
     .motivational {
       font-family: 'Pacifico', cursive;
       font-size: 1.6rem;
@@ -76,6 +79,7 @@
       animation: pulse 2s infinite;
       text-shadow: 1px 1px 1px #ccc;
     }
+
     .days-left {
       margin-top: 5px;
       font-size: 1.1rem;
@@ -87,16 +91,6 @@
       50% { transform: scale(1.05); opacity: 0.8; }
       100% { transform: scale(1); opacity: 1; }
     }
-
-    @keyframes dangerPulse {
-      0% { transform: scale(1); box-shadow: 0 0 5px #f56565; }
-      50% { transform: scale(1.03); box-shadow: 0 0 15px #f56565; }
-      100% { transform: scale(1); box-shadow: 0 0 5px #f56565; }
-    }
-
-    .progress-bar.pulse {
-      animation: dangerPulse 1.5s infinite;
-    }
   </style>
 </head>
 <body>
@@ -106,24 +100,23 @@
   </header>
 
   <div class="progress-container">
-    <div id="progress-bar" class="progress-bar" style="width: 0%;">
-      <span id="progress-text">0 / 0</span>
-    </div>
-    <div id="progress-indicator" class="progress-indicator" style="left: 0%;">1</div>
+    <div id="progress-bar" class="progress-bar"></div>
+    <div id="progress-indicator" class="progress-indicator">0 / 134</div>
   </div>
 
   <div class="info" id="day-text">Azi e ...</div>
   <div class="motivational">Keep going, you're doing great!</div>
-  <div class="days-left" id="days-left">Au mai rămas ... zile</div>
+  <div class="days-left" id="days-left">Zile trecute: ...</div>
 
   <script>
     const startDate = new Date("2025-05-13");
     const endDate = new Date("2025-09-23");
     const today = new Date();
+    today.setHours(0, 0, 0, 0);
 
     const totalDays = Math.floor((endDate - startDate) / (1000 * 60 * 60 * 24)) + 1;
-    const daysPassed = Math.floor((today - startDate) / (1000 * 60 * 60 * 24)) + 1;
-    const currentDay = Math.min(Math.max(daysPassed, 1), totalDays);
+    const daysPassed = Math.floor((today - startDate) / (1000 * 60 * 60 * 24)); // fără ziua de azi
+    const currentDay = Math.min(daysPassed + 1, totalDays);
     const daysRemaining = totalDays - currentDay;
 
     const formattedDate = today.toLocaleDateString('ro-RO', {
@@ -132,39 +125,33 @@
       year: 'numeric'
     });
 
-    document.getElementById("day-text").textContent = `Azi e ${formattedDate}, ziua ${currentDay + 1} / ${totalDays}`;
-    document.getElementById("days-left").textContent = `Au mai rămas ${daysRemaining} zile`;
-
-    const progressPercentage = (currentDay / totalDays) * 100;
     const progressBar = document.getElementById("progress-bar");
-    const progressText = document.getElementById("progress-text");
-
-    // Gradient progresiv
-    let gradient;
-    if (progressPercentage < 50) {
-      gradient = `linear-gradient(to right, #48bb78, #ecc94b ${progressPercentage}%)`;
-      progressText.style.color = "white";
-    } else {
-      gradient = `linear-gradient(to right, #ecc94b, #f56565 ${progressPercentage}%)`;
-      progressText.style.color = progressPercentage < 67 ? "#1a202c" : "white";
-    }
-    progressBar.style.background = gradient;
-    progressBar.style.width = `${progressPercentage}%`;
-
-    // Pulsare dacă progresul este ≥ 80%
-    if (progressPercentage >= 80) {
-      progressBar.classList.add("pulse");
-    } else {
-      progressBar.classList.remove("pulse");
-    }
-
-    // Text din bară
-    progressText.textContent = `${currentDay} / ${totalDays}`;
-
-    // Indicator
     const indicator = document.getElementById("progress-indicator");
-    indicator.textContent = currentDay + 1;
-    indicator.style.left = `calc(${progressPercentage}% - 20px)`;
+
+    // HANDLING EDGE CASES
+    if (today < startDate) {
+      document.getElementById("day-text").textContent = `Încă nu a început misiunea`;
+      document.getElementById("days-left").textContent = `Vor fi ${totalDays} zile în total.`;
+      progressBar.style.width = "0%";
+      indicator.textContent = `0 / ${totalDays}`;
+      indicator.style.left = `0%`;
+    } else if (today > endDate) {
+      document.getElementById("day-text").textContent = `Misiunea s-a încheiat 🎉`;
+      document.getElementById("days-left").textContent = `Ai finalizat toate cele ${totalDays} zile!`;
+      progressBar.style.width = "100%";
+      indicator.textContent = `${totalDays} / ${totalDays}`;
+      indicator.style.left = `calc(100% - 30px)`;
+    } else {
+      // Normal situation
+      document.getElementById("day-text").textContent = `Azi e ${formattedDate}`;
+      document.getElementById("days-left").textContent = `Zile trecute: ${daysPassed} + 1 (azi) → ${currentDay} / ${totalDays}`;
+
+      const progressPercentage = (currentDay / totalDays) * 100;
+      progressBar.style.width = `${progressPercentage}%`;
+
+      indicator.textContent = `${currentDay} / ${totalDays}`;
+      indicator.style.left = `calc(${progressPercentage}% - 30px)`;
+    }
   </script>
 </body>
 </html>
