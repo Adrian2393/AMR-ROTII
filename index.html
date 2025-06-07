@@ -32,7 +32,7 @@
     }
 
     .progress-container {
-      background: linear-gradient(to right, #38a169, #f6e05e, #e53e3e); /* gradient pe întreaga bară */
+      background: linear-gradient(to right, #38a169, #f6e05e, #e53e3e);
       height: 30px;
       position: relative;
       margin: 30px auto 10px;
@@ -43,8 +43,8 @@
 
     .progress-bar {
       height: 100%;
+      background-color: rgba(255, 255, 255, 0.7);
       width: 0%;
-      background-color: rgba(255, 255, 255, 0.6); /* overlay alb translucid */
       transition: width 2s ease-in-out;
     }
 
@@ -86,6 +86,32 @@
       color: #2d3748;
     }
 
+    .calendar {
+      margin: 30px auto;
+      max-width: 800px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 4px;
+      font-size: 18px;
+    }
+
+    .calendar span {
+      width: 20px;
+      height: 20px;
+      display: inline-block;
+      text-align: center;
+      line-height: 20px;
+      border-radius: 3px;
+      background-color: #c6f6d5;
+      color: #22543d;
+    }
+
+    .calendar .done {
+      background-color: #38a169;
+      color: white;
+    }
+
     @keyframes pulse {
       0% { transform: scale(1); opacity: 1; }
       50% { transform: scale(1.05); opacity: 0.8; }
@@ -106,7 +132,9 @@
 
   <div class="info" id="day-text">Azi e ...</div>
   <div class="motivational">Keep going, you're doing great!</div>
-  <div class="days-left" id="days-left">Zile trecute: ...</div>
+  <div class="days-left" id="days-left">...</div>
+
+  <div class="calendar" id="calendar"></div>
 
   <script>
     const startDate = new Date("2025-05-13");
@@ -128,27 +156,22 @@
     const progressBar = document.getElementById("progress-bar");
     const indicator = document.getElementById("progress-indicator");
 
-    if (today < startDate) {
-      document.getElementById("day-text").textContent = `Încă nu a început misiunea`;
-      document.getElementById("days-left").textContent = `Vor fi ${totalDays} zile în total.`;
-      progressBar.style.width = "0%";
-      indicator.textContent = `0 / ${totalDays}`;
-      indicator.style.left = `0%`;
-    } else if (today > endDate) {
-      document.getElementById("day-text").textContent = `Misiunea s-a încheiat 🎉`;
-      document.getElementById("days-left").textContent = `Ai finalizat toate cele ${totalDays} zile!`;
-      progressBar.style.width = "100%";
-      indicator.textContent = `${totalDays} / ${totalDays}`;
-      indicator.style.left = `calc(100% - 35px)`;
-    } else {
-      // Aici suntem în perioada activă
-      document.getElementById("day-text").textContent = `Azi e ${formattedDate}`;
-      document.getElementById("days-left").textContent = `Zile trecute: ${daysPassed} + 1 (azi) → ${currentDay} / ${totalDays}`;
+    // Set textul
+    document.getElementById("day-text").textContent = `Azi e ${formattedDate}`;
+    document.getElementById("days-left").textContent = `Zile trecute: ${daysPassed} + 1 (azi) → ${currentDay} / ${totalDays}`;
+    progressBar.style.width = `${progressPercentage}%`;
+    indicator.textContent = `${daysPassed} / ${totalDays}`;
+    indicator.style.left = `calc(${progressPercentage}% - 35px)`;
 
-      // Umple progres bar-ul și mută indicatorul
-      progressBar.style.width = `${progressPercentage}%`;
-      indicator.textContent = `${daysPassed} / ${totalDays}`;
-      indicator.style.left = `calc(${progressPercentage}% - 35px)`;
+    // Calendar vizual
+    const calendar = document.getElementById("calendar");
+    for (let i = 1; i <= totalDays; i++) {
+      const dayBox = document.createElement("span");
+      dayBox.textContent = "X";
+      if (i <= daysPassed) {
+        dayBox.classList.add("done");
+      }
+      calendar.appendChild(dayBox);
     }
   </script>
 </body>
