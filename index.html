@@ -13,65 +13,55 @@
       color: #1c1c1c;
       text-align: center;
     }
-
     header {
       background-color: #22543d;
       color: white;
       padding: 20px 10px;
     }
-
     .title {
       font-size: 2rem;
       font-weight: bold;
     }
-
     .subtitle {
       font-family: 'Pacifico', cursive;
       font-size: 1.8rem;
       margin-top: 10px;
     }
-
     .progress-container {
-      background: linear-gradient(to right, #38a169, #f6e05e, #e53e3e);
+      background-color: #e2e8f0;
       height: 30px;
       position: relative;
-      margin: 30px auto 10px;
+      margin: 0 auto;
       max-width: 800px;
       border-radius: 15px;
       overflow: hidden;
     }
-
     .progress-bar {
       height: 100%;
-      background-color: rgba(255, 255, 255, 0.7);
-      width: 0%;
-      transition: width 2s ease-in-out;
+      background-color: #48bb78;
+      transition: width 0.5s;
     }
-
     .progress-indicator {
       position: absolute;
-      top: -25px;
-      width: 70px;
+      top: -12px;
+      width: 40px;
       height: 40px;
       background-color: white;
       border: 3px solid #38a169;
-      border-radius: 20px;
+      border-radius: 50%;
       display: flex;
       justify-content: center;
       align-items: center;
       font-weight: bold;
-      color: #2f855a;
+      color: #38a169;
       box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-      transition: left 2s ease-in-out;
     }
-
     .info {
       margin: 20px 0 10px;
       font-size: 1.3rem;
       font-weight: bold;
       text-shadow: 1px 1px 2px #b7b7b7;
     }
-
     .motivational {
       font-family: 'Pacifico', cursive;
       font-size: 1.6rem;
@@ -79,37 +69,10 @@
       animation: pulse 2s infinite;
       text-shadow: 1px 1px 1px #ccc;
     }
-
     .days-left {
       margin-top: 5px;
       font-size: 1.1rem;
       color: #2d3748;
-    }
-
-    .calendar {
-      margin: 30px auto;
-      max-width: 800px;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 4px;
-      font-size: 18px;
-    }
-
-    .calendar span {
-      width: 20px;
-      height: 20px;
-      display: inline-block;
-      text-align: center;
-      line-height: 20px;
-      border-radius: 3px;
-      background-color: #c6f6d5;
-      color: #22543d;
-    }
-
-    .calendar .done {
-      background-color: #38a169;
-      color: white;
     }
 
     @keyframes pulse {
@@ -126,53 +89,41 @@
   </header>
 
   <div class="progress-container">
-    <div id="progress-bar" class="progress-bar"></div>
-    <div id="progress-indicator" class="progress-indicator">0 / 134</div>
+    <div id="progress-bar" class="progress-bar" style="width: 0%;"></div>
+    <div id="progress-indicator" class="progress-indicator" style="left: 0%;">1</div>
   </div>
 
   <div class="info" id="day-text">Azi e ...</div>
   <div class="motivational">Keep going, you're doing great!</div>
-  <div class="days-left" id="days-left">...</div>
-
-  <div class="calendar" id="calendar"></div>
+  <div class="days-left" id="days-left">Au mai rămas ... zile</div>
 
   <script>
     const startDate = new Date("2025-05-13");
     const endDate = new Date("2025-09-23");
     const today = new Date();
-    today.setHours(0, 0, 0, 0);
 
     const totalDays = Math.floor((endDate - startDate) / (1000 * 60 * 60 * 24)) + 1;
-    const daysPassed = Math.floor((today - startDate) / (1000 * 60 * 60 * 24)); // exclude azi
-    const currentDay = Math.min(daysPassed + 1, totalDays);
-    const progressPercentage = Math.min((currentDay / totalDays) * 100, 100);
+    const daysPassed = Math.floor((today - startDate) / (1000 * 60 * 60 * 24)) + 1;
+    const currentDay = Math.min(Math.max(daysPassed, 1), totalDays);
+    const daysRemaining = totalDays - currentDay;
 
+    // Formatam data in format DD.MM.YYYY
     const formattedDate = today.toLocaleDateString('ro-RO', {
       day: '2-digit',
       month: '2-digit',
       year: 'numeric'
     });
 
-    const progressBar = document.getElementById("progress-bar");
+    document.getElementById("day-text").textContent = `Azi e ${formattedDate}, ziua ${currentDay} / ${totalDays}`;
+    document.getElementById("days-left").textContent = `Au mai rămas ${daysRemaining} zile`;
+
+    // Actualizează bara de progres
+    const progressPercentage = (currentDay / totalDays) * 100;
+    document.getElementById("progress-bar").style.width = `${progressPercentage}%`;
+
     const indicator = document.getElementById("progress-indicator");
-
-    // Set textul
-    document.getElementById("day-text").textContent = `Azi e ${formattedDate}`;
-    document.getElementById("days-left").textContent = `Zile trecute: ${daysPassed} + 1 (azi) → ${currentDay} / ${totalDays}`;
-    progressBar.style.width = `${progressPercentage}%`;
-    indicator.textContent = `${daysPassed} / ${totalDays}`;
-    indicator.style.left = `calc(${progressPercentage}% - 35px)`;
-
-    // Calendar vizual
-    const calendar = document.getElementById("calendar");
-    for (let i = 1; i <= totalDays; i++) {
-      const dayBox = document.createElement("span");
-      dayBox.textContent = "X";
-      if (i <= daysPassed) {
-        dayBox.classList.add("done");
-      }
-      calendar.appendChild(dayBox);
-    }
+    indicator.textContent = currentDay;
+    indicator.style.left = `calc(${progressPercentage}% - 20px)`; // -20px pentru a centra cercul
   </script>
 </body>
 </html>
