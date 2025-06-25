@@ -1,129 +1,162 @@
 <!DOCTYPE html>
 <html lang="ro">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Calendar EUFOR rot. II</title>
-  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Rubik:wght@400;700&display=swap" rel="stylesheet">
-  <style>
+<meta charset="UTF-M">
+<title>Calendar Echipe Urgenta</title>
+<style>
     body {
-      margin: 0;
-      font-family: 'Rubik', sans-serif;
-      background-color: #f0fdf4;
-      color: #1c1c1c;
-      text-align: center;
+        font-family: sans-serif;
     }
-    header {
-      background-color: #22543d;
-      color: white;
-      padding: 20px 10px;
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
     }
-    .title {
-      font-size: 2rem;
-      font-weight: bold;
+    th, td {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
     }
-    .subtitle {
-      font-family: 'Pacifico', cursive;
-      font-size: 1.8rem;
-      margin-top: 10px;
+    th {
+        background-color: #f2f2f2;
     }
-    .progress-container {
-      background-color: #e2e8f0;
-      height: 30px;
-      position: relative;
-      margin: 0 auto;
-      max-width: 800px;
-      border-radius: 15px;
-      overflow: hidden;
+    .alpha {
+        background-color: #E74C3C; /* Rosu */
+        color: white;
+        font-weight: bold;
     }
-    .progress-bar {
-      height: 100%;
-      background-color: #48bb78;
-      transition: width 0.5s;
+    .bravo {
+        background-color: #F39C12; /* Portocaliu */
+        color: white;
+        font-weight: bold;
     }
-    .progress-indicator {
-      position: absolute;
-      top: -12px;
-      width: 40px;
-      height: 40px;
-      background-color: white;
-      border: 3px solid #38a169;
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-weight: bold;
-      color: #38a169;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    .charlie {
+        background-color: #2ECC71; /* Verde */
+        color: white;
+        font-weight: bold;
     }
-    .info {
-      margin: 20px 0 10px;
-      font-size: 1.3rem;
-      font-weight: bold;
-      text-shadow: 1px 1px 2px #b7b7b7;
+    .month-header {
+        background-color: #3498DB;
+        color: white;
+        font-size: 18px;
+        text-align: center;
     }
-    .motivational {
-      font-family: 'Pacifico', cursive;
-      font-size: 1.6rem;
-      color: #2f855a;
-      animation: pulse 2s infinite;
-      text-shadow: 1px 1px 1px #ccc;
-    }
-    .days-left {
-      margin-top: 5px;
-      font-size: 1.1rem;
-      color: #2d3748;
-    }
-
-    @keyframes pulse {
-      0% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.05); opacity: 0.8; }
-      100% { transform: scale(1); opacity: 1; }
-    }
-  </style>
+</style>
 </head>
 <body>
-  <header>
-    <div class="title">Calendar EUFOR rot. II</div>
-    <div class="subtitle">13 mai – 23 septembrie 2025</div>
-  </header>
 
-  <div class="progress-container">
-    <div id="progress-bar" class="progress-bar" style="width: 0%;"></div>
-    <div id="progress-indicator" class="progress-indicator" style="left: 0%;">1</div>
-  </div>
+<h1>Calendar Echipe de Urgenta (25.06.2025 - 25.09.2025)</h1>
 
-  <div class="info" id="day-text">Azi e ...</div>
-  <div class="motivational">Keep going, you're doing great!</div>
-  <div class="days-left" id="days-left">Au mai rămas ... zile</div>
+<table>
+    <thead>
+        <tr>
+            <th>Data</th>
+            <th>Ziua</th>
+            <th>Urgenta I</th>
+            <th>Urgenta II</th>
+            <th>Urgenta III</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td colspan="5" class="month-header">Iunie 2025</td></tr>
+        <tr><td>25.06.2025</td><td>Miercuri</td><td class="alpha">Alpha</td><td class="charlie">Charlie</td><td class="bravo">Bravo</td></tr>
+        <tr><td>26.06.2025</td><td>Joi</td><td class="charlie">Charlie</td><td class="bravo">Bravo</td><td class="alpha">Alpha</td></tr>
+        <tr><td>27.06.2025</td><td>Vineri</td><td class="bravo">Bravo</td><td class="alpha">Alpha</td><td class="charlie">Charlie</td></tr>
+        <tr><td>28.06.2025</td><td>Sâmbata</td><td class="alpha">Alpha</td><td class="charlie">Charlie</td><td class="bravo">Bravo</td></tr>
+        <tr><td>29.06.2025</td><td>Duminica</td><td class="charlie">Charlie</td><td class="bravo">Bravo</td><td class="alpha">Alpha</td></tr>
+        <tr><td>30.06.2025</td><td>Luni</td><td class="bravo">Bravo</td><td class="alpha">Alpha</td><td class="charlie">Charlie</td></tr>
+        <tr><td colspan="5" class="month-header">Iulie 2025</td></tr>
+        <tr><td>01.07.2025</td><td>Marti</td><td class="alpha">Alpha</td><td class="charlie">Charlie</td><td class="bravo">Bravo</td></tr>
+        <tr><td>02.07.2025</td><td>Miercuri</td><td class="charlie">Charlie</td><td class="bravo">Bravo</td><td class="alpha">Alpha</td></tr>
+        <tr><td>03.07.2025</td><td>Joi</td><td class="bravo">Bravo</td><td class="alpha">Alpha</td><td class="charlie">Charlie</td></tr>
+        <tr><td>04.07.2025</td><td>Vineri</td><td class="alpha">Alpha</td><td class="charlie">Charlie</td><td class="bravo">Bravo</td></tr>
+        <tr><td>05.07.2025</td><td>Sâmbata</td><td class="charlie">Charlie</td><td class="bravo">Bravo</td><td class="alpha">Alpha</td></tr>
+        <tr><td>06.07.2025</td><td>Duminica</td><td class="bravo">Bravo</td><td class="alpha">Alpha</td><td class="charlie">Charlie</td></tr>
+        <tr><td>07.07.2025</td><td>Luni</td><td class="alpha">Alpha</td><td class="charlie">Charlie</td><td class="bravo">Bravo</td></tr>
+        <tr><td>08.07.2025</td><td>Marti</td><td class="charlie">Charlie</td><td class="bravo">Bravo</td><td class="alpha">Alpha</td></tr>
+        <tr><td>09.07.2025</td><td>Miercuri</td><td class="bravo">Bravo</td><td class="alpha">Alpha</td><td class="charlie">Charlie</td></tr>
+        <tr><td>10.07.2025</td><td>Joi</td><td class="alpha">Alpha</td><td class="charlie">Charlie</td><td class="bravo">Bravo</td></tr>
+        <tr><td>11.07.2025</td><td>Vineri</td><td class="charlie">Charlie</td><td class="bravo">Bravo</td><td class="alpha">Alpha</td></tr>
+        <tr><td>12.07.2025</td><td>Sâmbata</td><td class="bravo">Bravo</td><td class="alpha">Alpha</td><td class="charlie">Charlie</td></tr>
+        <tr><td>13.07.2025</td><td>Duminica</td><td class="alpha">Alpha</td><td class="charlie">Charlie</td><td class="bravo">Bravo</td></tr>
+        <tr><td>14.07.2025</td><td>Luni</td><td class="charlie">Charlie</td><td class="bravo">Bravo</td><td class="alpha">Alpha</td></tr>
+        <tr><td>15.07.2025</td><td>Marti</td><td class="bravo">Bravo</td><td class="alpha">Alpha</td><td class="charlie">Charlie</td></tr>
+        <tr><td>16.07.2025</td><td>Miercuri</td><td class="alpha">Alpha</td><td class="charlie">Charlie</td><td class="bravo">Bravo</td></tr>
+        <tr><td>17.07.2025</td><td>Joi</td><td class="charlie">Charlie</td><td class="bravo">Bravo</td><td class="alpha">Alpha</td></tr>
+        <tr><td>18.07.2025</td><td>Vineri</td><td class="bravo">Bravo</td><td class="alpha">Alpha</td><td class="charlie">Charlie</td></tr>
+        <tr><td>19.07.2025</td><td>Sâmbata</td><td class="alpha">Alpha</td><td class="charlie">Charlie</td><td class="bravo">Bravo</td></tr>
+        <tr><td>20.07.2025</td><td>Duminica</td><td class="charlie">Charlie</td><td class="bravo">Bravo</td><td class="alpha">Alpha</td></tr>
+        <tr><td>21.07.2025</td><td>Luni</td><td class="bravo">Bravo</td><td class="alpha">Alpha</td><td class="charlie">Charlie</td></tr>
+        <tr><td>22.07.2025</td><td>Marti</td><td class="alpha">Alpha</td><td class="charlie">Charlie</td><td class="bravo">Bravo</td></tr>
+        <tr><td>23.07.2025</td><td>Miercuri</td><td class="charlie">Charlie</td><td class="bravo">Bravo</td><td class="alpha">Alpha</td></tr>
+        <tr><td>24.07.2025</td><td>Joi</td><td class="bravo">Bravo</td><td class="alpha">Alpha</td><td class="charlie">Charlie</td></tr>
+        <tr><td>25.07.2025</td><td>Vineri</td><td class="alpha">Alpha</td><td class="charlie">Charlie</td><td class="bravo">Bravo</td></tr>
+        <tr><td>26.07.2025</td><td>Sâmbata</td><td class="charlie">Charlie</td><td class="bravo">Bravo</td><td class="alpha">Alpha</td></tr>
+        <tr><td>27.07.2025</td><td>Duminica</td><td class="bravo">Bravo</td><td class="alpha">Alpha</td><td class="charlie">Charlie</td></tr>
+        <tr><td>28.07.2025</td><td>Luni</td><td class="alpha">Alpha</td><td class="charlie">Charlie</td><td class="bravo">Bravo</td></tr>
+        <tr><td>29.07.2025</td><td>Marti</td><td class="charlie">Charlie</td><td class="bravo">Bravo</td><td class="alpha">Alpha</td></tr>
+        <tr><td>30.07.2025</td><td>Miercuri</td><td class="bravo">Bravo</td><td class="alpha">Alpha</td><td class="charlie">Charlie</td></tr>
+        <tr><td>31.07.2025</td><td>Joi</td><td class="alpha">Alpha</td><td class="charlie">Charlie</td><td class="bravo">Bravo</td></tr>
+        <tr><td colspan="5" class="month-header">August 2025</td></tr>
+        <tr><td>01.08.2025</td><td>Vineri</td><td class="charlie">Charlie</td><td class="bravo">Bravo</td><td class="alpha">Alpha</td></tr>
+        <tr><td>02.08.2025</td><td>Sâmbata</td><td class="bravo">Bravo</td><td class="alpha">Alpha</td><td class="charlie">Charlie</td></tr>
+        <tr><td>03.08.2025</td><td>Duminica</td><td class="alpha">Alpha</td><td class="charlie">Charlie</td><td class="bravo">Bravo</td></tr>
+        <tr><td>04.08.2025</td><td>Luni</td><td class="charlie">Charlie</td><td class="bravo">Bravo</td><td class="alpha">Alpha</td></tr>
+        <tr><td>05.08.2025</td><td>Marti</td><td class="bravo">Bravo</td><td class="alpha">Alpha</td><td class="charlie">Charlie</td></tr>
+        <tr><td>06.08.2025</td><td>Miercuri</td><td class="alpha">Alpha</td><td class="charlie">Charlie</td><td class="bravo">Bravo</td></tr>
+        <tr><td>07.08.2025</td><td>Joi</td><td class="charlie">Charlie</td><td class="bravo">Bravo</td><td class="alpha">Alpha</td></tr>
+        <tr><td>08.08.2025</td><td>Vineri</td><td class="bravo">Bravo</td><td class="alpha">Alpha</td><td class="charlie">Charlie</td></tr>
+        <tr><td>09.08.2025</td><td>Sâmbata</td><td class="alpha">Alpha</td><td class="charlie">Charlie</td><td class="bravo">Bravo</td></tr>
+        <tr><td>10.08.2025</td><td>Duminica</td><td class="charlie">Charlie</td><td class="bravo">Bravo</td><td class="alpha">Alpha</td></tr>
+        <tr><td>11.08.2025</td><td>Luni</td><td class="bravo">Bravo</td><td class="alpha">Alpha</td><td class="charlie">Charlie</td></tr>
+        <tr><td>12.08.2025</td><td>Marti</td><td class="alpha">Alpha</td><td class="charlie">Charlie</td><td class="bravo">Bravo</td></tr>
+        <tr><td>13.08.2025</td><td>Miercuri</td><td class="charlie">Charlie</td><td class="bravo">Bravo</td><td class="alpha">Alpha</td></tr>
+        <tr><td>14.08.2025</td><td>Joi</td><td class="bravo">Bravo</td><td class="alpha">Alpha</td><td class="charlie">Charlie</td></tr>
+        <tr><td>15.08.2025</td><td>Vineri</td><td class="alpha">Alpha</td><td class="charlie">Charlie</td><td class="bravo">Bravo</td></tr>
+        <tr><td>16.08.2025</td><td>Sâmbata</td><td class="charlie">Charlie</td><td class="bravo">Bravo</td><td class="alpha">Alpha</td></tr>
+        <tr><td>17.08.2025</td><td>Duminica</td><td class="bravo">Bravo</td><td class="alpha">Alpha</td><td class="charlie">Charlie</td></tr>
+        <tr><td>18.08.2025</td><td>Luni</td><td class="alpha">Alpha</td><td class="charlie">Charlie</td><td class="bravo">Bravo</td></tr>
+        <tr><td>19.08.2025</td><td>Marti</td><td class="charlie">Charlie</td><td class="bravo">Bravo</td><td class="alpha">Alpha</td></tr>
+        <tr><td>20.08.2025</td><td>Miercuri</td><td class="bravo">Bravo</td><td class="alpha">Alpha</td><td class="charlie">Charlie</td></tr>
+        <tr><td>21.08.2025</td><td>Joi</td><td class="alpha">Alpha</td><td class="charlie">Charlie</td><td class="bravo">Bravo</td></tr>
+        <tr><td>22.08.2025</td><td>Vineri</td><td class="charlie">Charlie</td><td class="bravo">Bravo</td><td class="alpha">Alpha</td></tr>
+        <tr><td>23.08.2025</td><td>Sâmbata</td><td class="bravo">Bravo</td><td class="alpha">Alpha</td><td class="charlie">Charlie</td></tr>
+        <tr><td>24.08.2025</td><td>Duminica</td><td class="alpha">Alpha</td><td class="charlie">Charlie</td><td class="bravo">Bravo</td></tr>
+        <tr><td>25.08.2025</td><td>Luni</td><td class="charlie">Charlie</td><td class="bravo">Bravo</td><td class="alpha">Alpha</td></tr>
+        <tr><td>26.08.2025</td><td>Marti</td><td class="bravo">Bravo</td><td class="alpha">Alpha</td><td class="charlie">Charlie</td></tr>
+        <tr><td>27.08.2025</td><td>Miercuri</td><td class="alpha">Alpha</td><td class="charlie">Charlie</td><td class="bravo">Bravo</td></tr>
+        <tr><td>28.08.2025</td><td>Joi</td><td class="charlie">Charlie</td><td class="bravo">Bravo</td><td class="alpha">Alpha</td></tr>
+        <tr><td>29.08.2025</td><td>Vineri</td><td class="bravo">Bravo</td><td class="alpha">Alpha</td><td class="charlie">Charlie</td></tr>
+        <tr><td>30.08.2025</td><td>Sâmbata</td><td class="alpha">Alpha</td><td class="charlie">Charlie</td><td class="bravo">Bravo</td></tr>
+        <tr><td>31.08.2025</td><td>Duminica</td><td class="charlie">Charlie</td><td class="bravo">Bravo</td><td class="alpha">Alpha</td></tr>
+        <tr><td colspan="5" class="month-header">Septembrie 2025</td></tr>
+        <tr><td>01.09.2025</td><td>Luni</td><td class="bravo">Bravo</td><td class="alpha">Alpha</td><td class="charlie">Charlie</td></tr>
+        <tr><td>02.09.2025</td><td>Marti</td><td class="alpha">Alpha</td><td class="charlie">Charlie</td><td class="bravo">Bravo</td></tr>
+        <tr><td>03.09.2025</td><td>Miercuri</td><td class="charlie">Charlie</td><td class="bravo">Bravo</td><td class="alpha">Alpha</td></tr>
+        <tr><td>04.09.2025</td><td>Joi</td><td class="bravo">Bravo</td><td class="alpha">Alpha</td><td class="charlie">Charlie</td></tr>
+        <tr><td>05.09.2025</td><td>Vineri</td><td class="alpha">Alpha</td><td class="charlie">Charlie</td><td class="bravo">Bravo</td></tr>
+        <tr><td>06.09.2025</td><td>Sâmbata</td><td class="charlie">Charlie</td><td class="bravo">Bravo</td><td class="alpha">Alpha</td></tr>
+        <tr><td>07.09.2025</td><td>Duminica</td><td class="bravo">Bravo</td><td class="alpha">Alpha</td><td class="charlie">Charlie</td></tr>
+        <tr><td>08.09.2025</td><td>Luni</td><td class="alpha">Alpha</td><td class="charlie">Charlie</td><td class="bravo">Bravo</td></tr>
+        <tr><td>09.09.2025</td><td>Marti</td><td class="charlie">Charlie</td><td class="bravo">Bravo</td><td class="alpha">Alpha</td></tr>
+        <tr><td>10.09.2025</td><td>Miercuri</td><td class="bravo">Bravo</td><td class="alpha">Alpha</td><td class="charlie">Charlie</td></tr>
+        <tr><td>11.09.2025</td><td>Joi</td><td class="alpha">Alpha</td><td class="charlie">Charlie</td><td class="bravo">Bravo</td></tr>
+        <tr><td>12.09.2025</td><td>Vineri</td><td class="charlie">Charlie</td><td class="bravo">Bravo</td><td class="alpha">Alpha</td></tr>
+        <tr><td>13.09.2025</td><td>Sâmbata</td><td class="bravo">Bravo</td><td class="alpha">Alpha</td><td class="charlie">Charlie</td></tr>
+        <tr><td>14.09.2025</td><td>Duminica</td><td class="alpha">Alpha</td><td class="charlie">Charlie</td><td class="bravo">Bravo</td></tr>
+        <tr><td>15.09.2025</td><td>Luni</td><td class="charlie">Charlie</td><td class="bravo">Bravo</td><td class="alpha">Alpha</td></tr>
+        <tr><td>16.09.2025</td><td>Marti</td><td class="bravo">Bravo</td><td class="alpha">Alpha</td><td class="charlie">Charlie</td></tr>
+        <tr><td>17.09.2025</td><td>Miercuri</td><td class="alpha">Alpha</td><td class="charlie">Charlie</td><td class="bravo">Bravo</td></tr>
+        <tr><td>18.09.2025</td><td>Joi</td><td class="charlie">Charlie</td><td class="bravo">Bravo</td><td class="alpha">Alpha</td></tr>
+        <tr><td>19.09.2025</td><td>Vineri</td><td class="bravo">Bravo</td><td class="alpha">Alpha</td><td class="charlie">Charlie</td></tr>
+        <tr><td>20.09.2025</td><td>Sâmbata</td><td class="alpha">Alpha</td><td class="charlie">Charlie</td><td class="bravo">Bravo</td></tr>
+        <tr><td>21.09.2025</td><td>Duminica</td><td class="charlie">Charlie</td><td class="bravo">Bravo</td><td class="alpha">Alpha</td></tr>
+        <tr><td>22.09.2025</td><td>Luni</td><td class="bravo">Bravo</td><td class="alpha">Alpha</td><td class="charlie">Charlie</td></tr>
+        <tr><td>23.09.2025</td><td>Marti</td><td class="alpha">Alpha</td><td class="charlie">Charlie</td><td class="bravo">Bravo</td></tr>
+        <tr><td>24.09.2025</td><td>Miercuri</td><td class="charlie">Charlie</td><td class="bravo">Bravo</td><td class="alpha">Alpha</td></tr>
+        <tr><td>25.09.2025</td><td>Joi</td><td class="bravo">Bravo</td><td class="alpha">Alpha</td><td class="charlie">Charlie</td></tr>
+    </tbody>
+</table>
 
-  <script>
-    const startDate = new Date("2025-05-13");
-    const endDate = new Date("2025-09-23");
-    const today = new Date();
-
-    const totalDays = Math.floor((endDate - startDate) / (1000 * 60 * 60 * 24)) + 1;
-    const daysPassed = Math.floor((today - startDate) / (1000 * 60 * 60 * 24)) + 1;
-    const currentDay = Math.min(Math.max(daysPassed, 1), totalDays);
-    const daysRemaining = totalDays - currentDay;
-
-    // Formatam data in format DD.MM.YYYY
-    const formattedDate = today.toLocaleDateString('ro-RO', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric'
-    });
-
-    document.getElementById("day-text").textContent = `Azi e ${formattedDate}, ziua ${currentDay} / ${totalDays}`;
-    document.getElementById("days-left").textContent = `Au mai rămas ${daysRemaining} zile`;
-
-    // Actualizează bara de progres
-    const progressPercentage = (currentDay / totalDays) * 100;
-    document.getElementById("progress-bar").style.width = `${progressPercentage}%`;
-
-    const indicator = document.getElementById("progress-indicator");
-    indicator.textContent = currentDay;
-    indicator.style.left = `calc(${progressPercentage}% - 20px)`; // -20px pentru a centra cercul
-  </script>
 </body>
 </html>
